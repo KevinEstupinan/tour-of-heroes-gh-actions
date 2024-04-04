@@ -15,7 +15,11 @@ on:
   workflow_dispatch:
     inputs:
       test:
-        type: text
+        type: choice
+        options:
+          - Si
+          - No
+          
         required: true
 
 jobs:
