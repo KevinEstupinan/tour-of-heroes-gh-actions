@@ -1,6 +1,6 @@
 name: Reusable workflow example # https://docs.github.com/en/actions/using-workflows/reusing-workflows
 
-on:
+on:  
   workflow_call:
     inputs:
       greeting:
@@ -11,6 +11,11 @@ on:
     secrets:
       MY_SECRET:
         description: 'A secret value'
+        required: true
+  workflow_dispatch:
+    inputs:
+      test:
+        type: text
         required: true
 
 jobs:
