@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  CHECK_SECRET: ${{ secrets.CHECK_SECRET}}
+  CHECK_SECRET: ${{ secrets.CHECK_SECRET }}
 
 jobs:
   testing_secrets:
