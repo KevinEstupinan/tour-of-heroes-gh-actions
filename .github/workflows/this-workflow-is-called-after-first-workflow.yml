@@ -1,0 +1,13 @@
+name: 📞 This workflow is called after a first workflow run succesfully
+
+on:
+    workflow_run:
+        workflows: ["🚀 Continuous Integration"]
+        types:
+        - completed
+jobs:
+  second:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - run: echo "Second action successfully finished!"
