@@ -1,4 +1,4 @@
-name: GitHub-hosted runners
+name: 🐈‍⬛ GitHub-hosted runners
 on:
   workflow_dispatch:
   push:
