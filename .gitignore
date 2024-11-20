@@ -52,5 +52,3 @@ nuget.config
 
 *.der
 *.base64
-
-node_modules
