@@ -1,26 +1,23 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
-	"name": "GitHub Actions demos",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "name": "GitHub Actions demos",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Web App"
+    }
+  },
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [8080],
-	"portsAttributes": {
-			"8080": {
-				"label": "Jenkins"
-			}
-	},
-	"features": {
-		"ghcr.io/devcontainers/features/github-cli:1": {},
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
-	}
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  }
+}
+
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
@@ -31,4 +28,3 @@
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root",
 
-}
