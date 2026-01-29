@@ -22,7 +22,28 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
+    - name: Authenticate to GitHub Packages
+      run: |
+        dotnet nuget remove source github || true
+        dotnet nuget add source "https://nuget.pkg.github.com/returngis/index.json" \
+          --name github \
+          --username ${{ github.actor }} \
+          --password ${{ secrets.GITHUB_TOKEN }} \
+          --store-password-in-clear-text
+
     - name: Build
       run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+
+
+
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
