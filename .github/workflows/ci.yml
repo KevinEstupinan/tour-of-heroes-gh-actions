@@ -1,4 +1,4 @@
-name: 🚀 Continuous Integration 
+name: 🚀 Continuous Integration
 
 on:
   push:
@@ -6,25 +6,39 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+  packages: read
+
 env:
   ORG_NAME: "returngis"
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Authentication GH Packages
-      run: dotnet nuget add source --username 0GiS0 --password ${{ secrets.PAT_PACKAGES }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ env.ORG_NAME }}/index.json"
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Authenticate to GitHub Packages
+        run: |
+          dotnet nuget add source "https://nuget.pkg.github.com/${{ env.ORG_NAME }}/index.json" \
+            --name github \
+            --username ${{ github.actor }} \
+            --password ${{ secrets.GITHUB_TOKEN }} \
+            --store-password-in-clear-text
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
