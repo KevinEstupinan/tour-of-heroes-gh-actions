@@ -1,4 +1,8 @@
-using tour_of_heroes_nuget;
+puclic class Hero
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
