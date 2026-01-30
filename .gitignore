@@ -57,3 +57,8 @@ nuget.config
 # GitHub Actions runner (NO versionar)
 actions-runner/
 *.tar.gz
+
+
+actions-runner/
+*.tar.gz
+# Local tool cache
